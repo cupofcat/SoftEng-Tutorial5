@@ -11,16 +11,21 @@ public class ConstantAverager implements IWeatherDataAverager {
 	}
 
 	@Override
-	public IForecastData getAverageDataFor(String city, String date) {
+	public ForecastData getAverageDataFor(String city, String date) {
 		float temperatureSum = 0;
 		int i = 0;
-		IForecastData forecast = null;
+		ForecastData forecast = null;
 		for (IWeatherDataSource dataSource : dataSources) {
 			forecast = dataSource.getForecastDataFor(city, date);
 			temperatureSum += forecast.getTemperature();
 			i++;
 		}
-		return new SimpleForecastData(city, date, temperatureSum/i, "fine");
+		return new ForecastData(city, date, temperatureSum/i, "fine");
+	}
+
+	@Override
+	public void addDataSource(IWeatherDataSource dataSource) {
+		// This is constant averager
 	}
 
 }

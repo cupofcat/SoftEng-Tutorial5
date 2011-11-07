@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.text.DateFormatter;
 
 import dataaverager.ConstantAverager;
-import dataaverager.IForecastData;
+import dataaverager.ForecastData;
 import dataaverager.IWeatherDataAverager;
 
 public class WeatherGUI
@@ -48,7 +48,7 @@ public class WeatherGUI
 				{
 				}
 				
-				IForecastData forecast = weatherData.getAverageDataFor(city, date);
+				ForecastData forecast = weatherData.getAverageDataFor(city, date);
 
 				b.setText("In " + city + " on " + date + ", the weather is " + forecast.getDescription() + ", " + forecast.getTemperature());
 			}
