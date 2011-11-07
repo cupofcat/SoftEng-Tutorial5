@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.text.DateFormatter;
 
+import dataaverager.ConstantAverager;
+import dataaverager.IForecastData;
+import dataaverager.IWeatherDataAverager;
+
 public class WeatherGUI
 {
 	public static void main(String args[]) throws Exception
@@ -27,6 +31,7 @@ public class WeatherGUI
 		// ties up the expedient and good implementations here...
 		// using interfaces, the good implementations don't know they are connected
 		// to something expedient...
+		final IWeatherDataAverager weatherData = new ConstantAverager();
 		
 		l.addActionListener(new ActionListener()
 		{
@@ -42,8 +47,10 @@ public class WeatherGUI
 				catch (ParseException e1)
 				{
 				}
+				
+				IForecastData forecast = weatherData.getAverageDataFor(city, date);
 
-				b.setText("In " + city + " on " + date + ", the weather is " + "who knows?");
+				b.setText("In " + city + " on " + date + ", the weather is " + forecast.getDescription() + ", " + forecast.getTemperature());
 			}
 		});
 		p.add(l, BorderLayout.NORTH);
